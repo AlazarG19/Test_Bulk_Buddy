@@ -1,16 +1,19 @@
-import React, { useState } from "react";
+import React from "react";
 import "./Card.css";
 import Button from "../Button/Button";
-function Card({ food, onAdd, onRemove }) {
-  const [count, setCount] = useState(0);
+
+function Card({ food, onAdd, onRemove, cartItems }) {
   const { title, Image, price, id } = food;
+  console.log("food inside card",food)
+  
+  // Find the item in cart and get its quantity, or return 0 if not found
+  const count = cartItems.find(item => item.id === id)?.quantity || 0;
 
   const handleIncrement = () => {
-    setCount(count + 1);
     onAdd(food);
   };
+
   const handleDecrement = () => {
-    setCount(count - 1);
     onRemove(food);
   };
 

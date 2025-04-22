@@ -2,7 +2,7 @@ import React from "react";
 import "./CartPage.css";
 import Button from "../Button/Button";
 
-function CartPage({ cartItems, onAdd, onRemove, onCheckout, onBack }) {
+function CartPage({ cartItems, onAdd, onRemove, onCheckout, onBack, onClearCart }) {
   const totalPrice = cartItems.reduce((a, c) => a + c.price * c.quantity, 0);
 
   return (
@@ -24,30 +24,25 @@ function CartPage({ cartItems, onAdd, onRemove, onCheckout, onBack }) {
             {cartItems.map((item) => (
               <div key={item.id} className="cart-item">
                 <div className="item-info">
-                  <h3>{item.name}</h3>
-                  <p className="item-price">Price: ${item.price.toFixed(2)}</p>
-                  <p className="item-description">{item.description}</p>
-                </div>
-                <div className="item-quantity">
-                  <button 
-                    className="quantity-btn" 
-                    onClick={() => onRemove(item)}
-                  >
-                    -
-                  </button>
-                  <span className="quantity">{item.quantity}</span>
-                  <button 
-                    className="quantity-btn" 
-                    onClick={() => onAdd(item)}
-                  >
-                    +
-                  </button>
+                  <h3>{item.title}</h3>
+                  <div className="item-quantity">
+                    <button 
+                      className="quantity-btn" 
+                      onClick={() => onRemove(item)}
+                    >
+                      -
+                    </button>
+                    <span className="quantity">{item.quantity}</span>
+                    <button 
+                      className="quantity-btn" 
+                      onClick={() => onAdd(item)}
+                    >
+                      +
+                    </button>
+                  </div>
                 </div>
                 <div className="item-total">
-                  <span className="total-label">Total:</span>
-                  <span className="total-amount">
-                    ${(item.price * item.quantity).toFixed(2)}
-                  </span>
+                  ${(item.price * item.quantity).toFixed(2)}
                 </div>
               </div>
             ))}
@@ -64,6 +59,11 @@ function CartPage({ cartItems, onAdd, onRemove, onCheckout, onBack }) {
                 title="Back to Menu"
                 type="back"
                 onClick={onBack}
+              />
+              <Button
+                title="Clear Cart"
+                type="remove"
+                onClick={onClearCart}
               />
               <Button
                 title="Proceed to Checkout"

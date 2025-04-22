@@ -66,7 +66,7 @@ const OrderInfo = ({ onSubmit, onBack }) => {
             Back to Cart
           </button>
           <button type="submit" className="submit-button">
-            Proceed to Payment
+            Place Order
           </button>
         </div>
       </form>
